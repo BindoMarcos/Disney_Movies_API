@@ -2,8 +2,8 @@ package com.alkemy.challenge.repositories;
 
 import java.util.Optional;
 
-import com.alkemy.challenge.models.ERole;
-import com.alkemy.challenge.models.Role;
+import com.alkemy.challenge.models.User.ERole;
+import com.alkemy.challenge.models.User.Role;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

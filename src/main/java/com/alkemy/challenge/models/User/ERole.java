@@ -1,4 +1,4 @@
-package com.alkemy.challenge.models;
+package com.alkemy.challenge.models.User;
 
 public enum ERole {
     ROLE_USER,

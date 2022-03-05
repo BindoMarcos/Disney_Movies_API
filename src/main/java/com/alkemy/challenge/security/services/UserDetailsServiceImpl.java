@@ -1,6 +1,6 @@
 package com.alkemy.challenge.security.services;
 
-import com.alkemy.challenge.models.User;
+import com.alkemy.challenge.models.User.User;
 import com.alkemy.challenge.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

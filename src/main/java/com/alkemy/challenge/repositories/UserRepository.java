@@ -2,7 +2,7 @@ package com.alkemy.challenge.repositories;
 
 import java.util.Optional;
 
-import com.alkemy.challenge.models.User;
+import com.alkemy.challenge.models.User.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

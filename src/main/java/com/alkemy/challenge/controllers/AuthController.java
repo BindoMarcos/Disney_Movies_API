@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
-import com.alkemy.challenge.models.ERole;
-import com.alkemy.challenge.models.Role;
-import com.alkemy.challenge.models.User;
+import com.alkemy.challenge.models.User.ERole;
+import com.alkemy.challenge.models.User.Role;
+import com.alkemy.challenge.models.User.User;
 import com.alkemy.challenge.payload.request.LoginRequest;
 import com.alkemy.challenge.payload.request.SignupRequest;
 import com.alkemy.challenge.payload.response.JwtResponse;
