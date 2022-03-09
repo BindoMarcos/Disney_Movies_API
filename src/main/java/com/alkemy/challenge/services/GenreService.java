@@ -3,9 +3,9 @@ package com.alkemy.challenge.services;
 import java.io.IOException;
 import java.util.Optional;
 
-import com.alkemy.challenge.models.Character;
+import com.alkemy.challenge.models.Genre;
 import com.alkemy.challenge.payload.response.MessageResponse;
-import com.alkemy.challenge.repositories.ICharacterRepository;
+import com.alkemy.challenge.repositories.IGenreRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +14,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class CharacterService {
-    @Autowired
-    private ICharacterRepository charRepo;
+public class GenreService {
 
     @Autowired
-    private GenreService genreService;
+    private IGenreRepository genreRepo;
 
-    public Character save(String character, MultipartFile img) {
-        Character entity = new Character();
+    @Autowired
+    private FilmService filmService;
+
+    public Genre save(String genre, MultipartFile img) {
+        Genre entity = new Genre();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            entity = objectMapper.readValue(character, Character.class);
+            entity = objectMapper.readValue(genre, Genre.class);
             entity.setImg(img.getBytes());
-            charRepo.save(entity);
+            genreRepo.save(entity);
         } catch (IOException e) {
             ResponseEntity.badRequest().body(new MessageResponse(e.toString()));
         }
@@ -35,11 +36,11 @@ public class CharacterService {
         return entity;
     }
 
-    public Character updateImg(String name, MultipartFile img) {
-        Iterable<Character> entity = charRepo.findByName(name);
+    public Genre updateImg(String name, MultipartFile img) {
+        Iterable<Genre> entity = genreRepo.findByName(name);
         try {
             entity.iterator().next().setImg(img.getBytes());
-            charRepo.save(entity.iterator().next());
+            genreRepo.save(entity.iterator().next());
         } catch (Exception e) {
             ResponseEntity.badRequest().body(new MessageResponse(e.toString()));
         }
@@ -47,38 +48,25 @@ public class CharacterService {
         return entity.iterator().next();
     }
 
-    public Iterable<Object> obtainAll() {
-        return charRepo.obtainAll();
+    public Optional<Genre> findById(Long id_genre) {
+        return genreRepo.findById(id_genre);
     }
 
-    public Iterable<Character> findByName(String name) {
-        return charRepo.findByName(name);
-    }
-
-    public Iterable<Character> findByAge(Integer age) {
-        return charRepo.findByAge(age);
-    }
-
-    public Iterable<Character> findPerMovie(Long id_character) {
-        return charRepo.findPerMovie(id_character);
+    public void deletePerId(Long id_character) {
+        genreRepo.deletePerId(id_character);
     }
 
     public ResponseEntity<MessageResponse> deletePerName(String name) {
-        Iterable<Character> entity = charRepo.findByName(name);
-        Long id = entity.iterator().next().getIdCharacter();
+        Long id_genre = genreRepo.findByName(name).iterator().next().getIdGenre();
         ResponseEntity<MessageResponse> msg;
         try {
-            genreService.deletePerId(id);
-            charRepo.deletePerName(name);
+            filmService.updateIdGenre(id_genre);
+            genreRepo.deletePerName(name);
             msg = ResponseEntity.ok().body(new MessageResponse(name + " deleted successfuly"));
         } catch (Exception e) {
             msg = ResponseEntity.badRequest().body(new MessageResponse(e.toString()));
         }
-
         return msg;
     }
 
-    public Optional<Character> findById(Long id_character){
-        return charRepo.findById(id_character);
-    }
 }

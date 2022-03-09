@@ -15,6 +15,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -35,6 +37,7 @@ public class Character {
     @Column(nullable = false)
     private String history;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "characters_movies", joinColumns = {
             @JoinColumn(name = "idCharacter", nullable = false) }, inverseJoinColumns = {

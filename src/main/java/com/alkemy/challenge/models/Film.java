@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -34,9 +36,11 @@ public class Film {
     @Column(nullable = false)
     private Float qualification;
 
-   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "filmsId", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "filmsId", cascade = CascadeType.ALL)
     private List<Character> charactersID;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "idGenre")
     private Genre genreId;

@@ -13,6 +13,8 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -27,6 +29,7 @@ public class Genre {
     @Column(nullable = false , length = 20)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "genreId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Film> filmsId;
 
