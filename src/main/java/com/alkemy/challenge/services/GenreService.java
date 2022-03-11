@@ -52,10 +52,6 @@ public class GenreService {
         return genreRepo.findById(id_genre);
     }
 
-    public void deletePerId(Long id_character) {
-        genreRepo.deletePerId(id_character);
-    }
-
     public ResponseEntity<MessageResponse> deletePerName(String name) {
         Long id_genre = genreRepo.findByName(name).iterator().next().getIdGenre();
         ResponseEntity<MessageResponse> msg;
@@ -69,4 +65,11 @@ public class GenreService {
         return msg;
     }
 
+    public void deletePerId(Long id_character) {
+        genreRepo.deletePerId(id_character);
+    }
+
+    public Iterable<Genre> findByName(String name){
+        return genreRepo.findByName(name);
+    }
 }

@@ -41,12 +41,12 @@ public class GenderController {
     }
 
     @GetMapping(params = "id_genre")
-    public Optional<Genre> findById(Long id_genre){
+    public Optional<Genre> findById(Long id_genre) {
         return genreService.findById(id_genre);
     }
 
     @DeleteMapping("/delete/{name}")
-    public ResponseEntity<MessageResponse> deletePerName(@PathVariable String name){
+    public ResponseEntity<MessageResponse> deletePerName(@PathVariable String name) {
         return genreService.deletePerName(name);
     }
 

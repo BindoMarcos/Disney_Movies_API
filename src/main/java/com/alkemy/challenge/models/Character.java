@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 import lombok.Data;
 
 @Data
@@ -37,8 +38,8 @@ public class Character {
     @Column(nullable = false)
     private String history;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "characters_movies", joinColumns = {
             @JoinColumn(name = "idCharacter", nullable = false) }, inverseJoinColumns = {
                     @JoinColumn(name = "idFilm", nullable = false) })
@@ -47,4 +48,5 @@ public class Character {
     @Lob
     @Column(nullable = false)
     private byte[] img;
+
 }

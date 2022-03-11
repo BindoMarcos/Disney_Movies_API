@@ -1,7 +1,7 @@
 package com.alkemy.challenge.models;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,8 +37,8 @@ public class Film {
     private Float qualification;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "filmsId", cascade = CascadeType.ALL)
-    private List<Character> charactersID;
+    @ManyToMany(mappedBy = "filmsId")
+    private Set<Character> charactersID;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

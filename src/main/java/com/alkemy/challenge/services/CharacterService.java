@@ -78,7 +78,7 @@ public class CharacterService {
         return msg;
     }
 
-    public Optional<Character> findById(Long id_character){
+    public Optional<Character> findById(Long id_character) {
         return charRepo.findById(id_character);
     }
 }

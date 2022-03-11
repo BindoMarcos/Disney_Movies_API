@@ -74,8 +74,8 @@ public class CharacterController {
         return charService.findByAge(age);
     }
 
-    @GetMapping(params = "id_movie") // REVISAR 
-    public Iterable<Character> findByMovies(@RequestParam Long id_character) {
+    @GetMapping("/{id_character}") // REVISAR
+    public Iterable<Character> findByMovies(@PathVariable Long id_character) {
         return charService.findPerMovie(id_character);
     }
     // Fin Busqueda de Personajes

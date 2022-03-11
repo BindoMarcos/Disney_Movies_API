@@ -11,16 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface IGenreRepository extends JpaRepository<Genre, Long> {
-    
+
     public Iterable<Genre> findByName(String name);
 
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM genres WHERE name = :name", nativeQuery = true)
-    public void deletePerName(@Param("name")String name);
+    public void deletePerName(@Param("name") String name);
 
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM characters_movies WHERE id_character = :id_character", nativeQuery = true)
-    void deletePerId(@Param("id_character") Long id_character);
+    public void deletePerId(@Param("id_character") Long id_character);
+
+
 }
