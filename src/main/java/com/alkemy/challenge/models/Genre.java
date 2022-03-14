@@ -13,9 +13,13 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 @Entity
 @Data
@@ -28,8 +32,10 @@ public class Genre {
 
     @Column(nullable = false, length = 20)
     private String name;
-
-    @JsonIgnore
+    
+    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties("genreId")
+    @JsonBackReference
     @OneToMany(mappedBy = "genreId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Film> filmsId;
 

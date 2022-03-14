@@ -15,13 +15,13 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Data
 @Entity
+@Data
 @Table(name = "characters")
 public class Character {
 
@@ -38,15 +38,16 @@ public class Character {
     @Column(nullable = false)
     private String history;
 
-    @JsonIgnore 
+    @Lob
+    @Column(nullable = false)
+    private byte[] img;
+
+    @JsonIgnoreProperties("charactersID")
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "characters_movies", joinColumns = {
             @JoinColumn(name = "idCharacter", nullable = false) }, inverseJoinColumns = {
                     @JoinColumn(name = "idFilm", nullable = false) })
+    @EqualsAndHashCode.Exclude
     private Set<Film> filmsId;
-
-    @Lob
-    @Column(nullable = false)
-    private byte[] img;
 
 }

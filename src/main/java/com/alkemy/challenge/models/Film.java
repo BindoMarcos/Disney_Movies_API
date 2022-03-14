@@ -16,9 +16,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
@@ -35,17 +37,18 @@ public class Film {
     private Date creation_date;
     @Column(nullable = false)
     private Float qualification;
+    @Lob
+    @Column(nullable = false)
+    private byte[] img;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "filmsId")
-    private Set<Character> charactersID;
-
-    @JsonIgnore
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "idGenre")
     private Genre genreId;
 
-    @Lob
-    @Column(nullable = false)
-    private byte[] img;
+    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties("filmsId")
+    @ManyToMany(mappedBy = "filmsId")
+    private Set<Character> charactersID;
+
 }
