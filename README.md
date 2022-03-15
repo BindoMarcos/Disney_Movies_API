@@ -5,11 +5,13 @@ Java BackEnd Code Challenge de [Alkemy](https://www.alkemy.org/)
 >  - La conexion no cuenta con contraseña, solo usuario 'root' y corre en el 'localhost' con puerto 8081
 >  - Debajo se vera una parte del archivo application.properties para mayor entendimiento 
 
-´´´server.port=8081
+```yml
+server.port=8081
 spring.datasource.url= jdbc:mysql://localhost/disney
 spring.datasource.username= root
 spring.datasource.password=
-spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDialect´´´´
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDialect
+```
 
 ## Pasos para Usarla :clipboard: 
  1. 
