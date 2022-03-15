@@ -24,7 +24,9 @@ public interface ICharacterRepository extends JpaRepository<Character, Long> {
     @Query(value = "DELETE FROM characters WHERE name = :name", nativeQuery = true)
     void deletePerName(@Param("name") String name);
 
-    @Query(value = "SELECT * FROM characters_movies WHERE id_character = :id_character", nativeQuery = true)
-    public Iterable<Character> findPerMovie(@Param("id_character") Long id_character);
+
+    //To-Do
+    @Query(value = "SELECT * FROM characters INNER JOIN characters_movies WHERE idMovie = :idMovie", nativeQuery = true)
+    public Iterable<Character> findPerMovie(@Param("idMovie") Long idMovie);
 
 }

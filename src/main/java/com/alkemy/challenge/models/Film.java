@@ -48,7 +48,7 @@ public class Film {
 
     @EqualsAndHashCode.Exclude
     @JsonIgnoreProperties("filmsId")
-    @ManyToMany(mappedBy = "filmsId")
+    @ManyToMany(mappedBy = "filmsId", cascade = CascadeType.ALL)
     private Set<Character> charactersID;
 
 }

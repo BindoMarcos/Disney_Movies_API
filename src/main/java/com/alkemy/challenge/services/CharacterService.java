@@ -59,8 +59,8 @@ public class CharacterService {
         return charRepo.findByAge(age);
     }
 
-    public Iterable<Character> findPerMovie(Long id_character) {
-        return charRepo.findPerMovie(id_character);
+    public Iterable<Character> findPerMovie(Long idMovie) {
+        return charRepo.findPerMovie(idMovie);
     }
 
     public ResponseEntity<MessageResponse> deletePerName(String name) {
