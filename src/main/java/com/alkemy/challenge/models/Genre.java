@@ -13,13 +13,12 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","filmsId"})
 
 @Entity
 @Data
@@ -32,15 +31,14 @@ public class Genre {
 
     @Column(nullable = false, length = 20)
     private String name;
-    
-    @EqualsAndHashCode.Exclude
-    @JsonIgnoreProperties("genreId")
-    @JsonBackReference
-    @OneToMany(mappedBy = "genreId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Film> filmsId;
 
     @Lob
     @Column(nullable = false)
     private byte[] img;
 
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "genreId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Film> filmsId;
+
+    
 }

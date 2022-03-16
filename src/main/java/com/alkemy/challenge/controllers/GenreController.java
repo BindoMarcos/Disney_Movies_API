@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @PreAuthorize("hasRole('USER')")
 @RequestMapping("/genres")
-public class GenderController {
+public class GenreController {
 
     @Autowired
     private GenreService genreService;
